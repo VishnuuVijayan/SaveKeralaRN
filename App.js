@@ -6,7 +6,7 @@ import HomeScreen from "./screens/HomeScreen";
 import DisasterScreen from "./screens/DisasterScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 const Stack = createStackNavigator();
-import Font from "expo-font";
+import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 
 const Drawer = createDrawerNavigator();
