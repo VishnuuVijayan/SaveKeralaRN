@@ -1,11 +1,11 @@
 import React, { Component, useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+// import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./screens/HomeScreen";
 import DisasterScreen from "./screens/DisasterScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-const Stack = createStackNavigator();
+// const Stack = createStackNavigator();
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 
