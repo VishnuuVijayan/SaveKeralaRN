@@ -22,15 +22,18 @@ import { dummyData } from "../data/Data";
 import { cards } from "../data/homecarddata";
 
 import Axios from "axios";
+import LoadingScreen from "./LoadingScreen";
 // import { response } from "express";
 
 function HomeScreen({ navigation }) {
   const [data, setData] = useState([]);
-  const fetchData = () => {
-    Axios.get("http://192.168.43.191:5000/disaster/isactive")
+  const [loading, setLoading] = useState(true);
+  const fetchData = async () => {
+    Axios.get("http://192.168.43.191:5000/disaster/")
       .then((res) => {
         const data = res.data;
         setData(data);
+        setLoading(false);
         console.log(data);
       })
       .catch((error) => console.log("Error"));
@@ -38,7 +41,13 @@ function HomeScreen({ navigation }) {
   useEffect(() => {
     fetchData();
   }, []);
-
+  if (loading) {
+    return (
+      // <View>
+      <LoadingScreen />
+      // </View>
+    );
+  }
   return (
     <Container>
       <Header>
@@ -64,7 +73,7 @@ function HomeScreen({ navigation }) {
       //   alignItems: "center",
       // }}
       >
-        <Carousel data={dummyData} />
+        <Carousel data={data} />
         {cards.map((card) => (
           <Card key={card.key}>
             <CardItem>
