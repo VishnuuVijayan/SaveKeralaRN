@@ -23,6 +23,7 @@ import { cards } from "../data/homecarddata";
 
 import Axios from "axios";
 import LoadingScreen from "./LoadingScreen";
+import { TouchableOpacity } from "react-native-gesture-handler";
 // import { response } from "express";
 
 function HomeScreen({ navigation }) {
@@ -75,17 +76,26 @@ function HomeScreen({ navigation }) {
       >
         <Carousel data={data} />
         {cards.map((card) => (
-          <Card key={card.key}>
-            <CardItem>
-              <View style={{ width: 50, marginRight: 20 }}>
-                <Image source={{ uri: card.image }} style={styles.image} />
-              </View>
-              <Text>{card.heading}</Text>
-              <Right>
-                <Icon name="arrow-forward" />
-              </Right>
-            </CardItem>
-          </Card>
+          <TouchableOpacity onPress={() => navigation.navigate(card.btnRoute)}>
+            <Card key={card.key}>
+              <CardItem>
+                <View style={{ width: 50, marginRight: 20 }}>
+                  <Image source={{ uri: card.image }} style={styles.image} />
+                </View>
+                <Body
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                  }}
+                >
+                  <Text>{card.heading}</Text>
+                </Body>
+                <Right>
+                  <Icon name="arrow-forward" />
+                </Right>
+              </CardItem>
+            </Card>
+          </TouchableOpacity>
         ))}
       </Content>
     </Container>

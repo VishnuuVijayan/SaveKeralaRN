@@ -30,7 +30,13 @@ function DisasterScreen({ navigation }) {
           <Title>Details</Title>
         </Body>
         <Body />
-        <Right />
+        <Right>
+          <Icon
+            name="home"
+            style={{ color: "#fff", paddingRight: 10 }}
+            onPress={() => navigation.navigate("Home")}
+          />
+        </Right>
       </Header>
       <Content
         contentContainerStyle={{
