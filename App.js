@@ -9,6 +9,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import LoadingScreen from "./screens/LoadingScreen";
+import SettingsScreen from "./screens/SettingsScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -35,32 +36,22 @@ class App extends Component {
           <Drawer.Screen
             name="Home"
             component={HomeScreen}
-            options={{
-              headerStyle: {
-                backgroundColor: "#f4511e",
-              },
-              headerTintColor: "#fff",
-              headerTitleStyle: {
-                fontWeight: "bold",
-              },
-            }}
+
+            // }}
           />
           <Drawer.Screen
-            name="disaster"
+            name="Disaster"
             component={DisasterScreen}
-            options={{
-              title: "Disaster Details",
-              // title: 'My home',
-              headerStyle: {
-                backgroundColor: "#f4511e",
-              },
-              headerTintColor: "#fff",
-              headerTitleStyle: {
-                fontWeight: "bold",
-              },
-            }}
+
+            // }}
           />
-          <Drawer.Screen name="loading" component={LoadingScreen} />
+          <Drawer.Screen
+            name="Settings"
+            component={SettingsScreen}
+
+            // }}
+          />
+          {/* <Drawer.Screen name="loading" component={LoadingScreen} /> */}
         </Drawer.Navigator>
       </NavigationContainer>
     );
