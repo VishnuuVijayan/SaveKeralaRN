@@ -15,14 +15,9 @@
     "@react-navigation/drawer": "^5.4.1",
     "@react-navigation/native": "^5.1.5",
     "@react-navigation/stack": "^5.2.10",
-    "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
+    "axios": "^0.19.2",
     "expo": "~37.0.3",
     "expo-font": "^8.1.1",
-    "express": "^4.17.1",
-    "fetch": "^1.1.0",
-    "jsonwebtoken": "^8.5.1",
     "native-base": "2.13.8",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
@@ -39,8 +34,7 @@
   "devDependencies": {
     "@babel/core": "^7.8.6",
     "babel-preset-expo": "~8.1.0",
-    "concurrently": "^5.1.0",
-    "mongoose": "^5.9.7"
+    "concurrently": "^5.1.0"
   },
   "private": true
 }

@@ -22,20 +22,23 @@ import { dummyData } from "../data/Data";
 import { cards } from "../data/homecarddata";
 
 import Axios from "axios";
+// import { response } from "express";
 
 function HomeScreen({ navigation }) {
   const [data, setData] = useState([]);
-  useEffect(() => {
-    Axios.get("http://localhost:5000/disaster/isactive")
+  const fetchData = () => {
+    Axios.get("http://192.168.43.191:5000/disaster/isactive")
       .then((res) => {
         const data = res.data;
         setData(data);
         console.log(data);
       })
-      .catch((err) => {
-        console.log("Error recieving Data" + err.message);
-      });
+      .catch((error) => console.log("Error"));
+  };
+  useEffect(() => {
+    fetchData();
   }, []);
+
   return (
     <Container>
       <Header>
