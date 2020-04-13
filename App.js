@@ -8,6 +8,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 // const Stack = createStackNavigator();
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
+import LoadingScreen from "./screens/LoadingScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -59,6 +60,7 @@ class App extends Component {
               },
             }}
           />
+          <Drawer.Screen name="loading" component={LoadingScreen} />
         </Drawer.Navigator>
       </NavigationContainer>
     );
