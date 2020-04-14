@@ -30,7 +30,7 @@ function HomeScreen({ navigation }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const fetchData = async () => {
-    Axios.get("http://192.168.43.191:5000/disaster/")
+    Axios.get("http://192.168.1.11:5000/disaster/")
       .then((res) => {
         const data = res.data;
         setData(data);
