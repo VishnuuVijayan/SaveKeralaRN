@@ -1,10 +1,13 @@
 import React from "react";
 import { View, StyleSheet, Text, Image, Dimensions } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+// import { Navigation } from "react-native-navigation";
 
 const { width, height } = Dimensions.get("window");
 
 const CarouselItem = ({ item }) => {
   return (
+    // <TouchableOpacity onPress = {Navigation.na}
     <View style={styles.cardView}>
       <Image style={styles.image} source={{ uri: item.imgsrc }} />
       <View style={styles.textView}>

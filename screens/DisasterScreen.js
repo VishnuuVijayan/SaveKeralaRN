@@ -13,7 +13,7 @@ import {
 } from "native-base";
 // import Header from "../components/Header";
 
-function DisasterScreen({ navigation }) {
+function DisasterScreen({ navigation }, data) {
   return (
     <Container>
       <Header>

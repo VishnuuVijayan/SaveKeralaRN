@@ -10,6 +10,9 @@ import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import LoadingScreen from "./screens/LoadingScreen";
 import SettingsScreen from "./screens/SettingsScreen";
+import { createStackNavigator } from "@react-navigation/stack";
+
+const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
 
@@ -32,28 +35,20 @@ class App extends Component {
     }
     return (
       <NavigationContainer>
-        <Drawer.Navigator>
-          <Drawer.Screen
-            name="Home"
-            component={HomeScreen}
+        <Drawer.Navigator initialRouteName="Home">
+          <Drawer.Screen name="Home" component={HomeScreen} />
+          <Drawer.Screen name="Disaster" component={DisasterScreen} />
+          <Drawer.Screen name="Settings" component={SettingsScreen} />
+        </Drawer.Navigator></NavigationContainer>
+        // <NavigationContainer>
+        {/* <Stack.Navigator> */}
 
-            // }}
-          />
-          <Drawer.Screen
-            name="Disaster"
-            component={DisasterScreen}
-
-            // }}
-          />
-          <Drawer.Screen
-            name="Settings"
-            component={SettingsScreen}
-
-            // }}
-          />
-          {/* <Drawer.Screen name="loading" component={LoadingScreen} /> */}
-        </Drawer.Navigator>
-      </NavigationContainer>
+          {/* <Stack.Screen name="Home" component={HomeScreen} />
+          {/* <Stack.Screen name="Notifications" component={Notifications} /> */}
+          {/* <Stack.Screen name="Profile" component={Profile} /> */}
+          <Stack.Screen name="Settings" component={SettingsScreen} />
+        </Stack.Navigator> */}
+      // </NavigationContainer>
     );
   }
 }

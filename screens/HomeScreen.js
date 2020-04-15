@@ -35,7 +35,7 @@ function HomeScreen({ navigation }) {
         const data = res.data;
         setData(data);
         setLoading(false);
-        console.log(data);
+        // console.log(data);
       })
       .catch((error) => console.log("Error"));
   };
@@ -76,8 +76,11 @@ function HomeScreen({ navigation }) {
       >
         <Carousel data={data} />
         {cards.map((card) => (
-          <TouchableOpacity onPress={() => navigation.navigate(card.btnRoute)}>
-            <Card key={card.key}>
+          <TouchableOpacity
+            key={card.key}
+            onPress={() => navigation.navigate(card.btnRoute)}
+          >
+            <Card>
               <CardItem>
                 <View style={{ width: 50, marginRight: 20 }}>
                   <Image source={{ uri: card.image }} style={styles.image} />
