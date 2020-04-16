@@ -39,16 +39,8 @@ class App extends Component {
           <Drawer.Screen name="Home" component={HomeScreen} />
           <Drawer.Screen name="Disaster" component={DisasterScreen} />
           <Drawer.Screen name="Settings" component={SettingsScreen} />
-        </Drawer.Navigator></NavigationContainer>
-        // <NavigationContainer>
-        {/* <Stack.Navigator> */}
-
-          {/* <Stack.Screen name="Home" component={HomeScreen} />
-          {/* <Stack.Screen name="Notifications" component={Notifications} /> */}
-          {/* <Stack.Screen name="Profile" component={Profile} /> */}
-          <Stack.Screen name="Settings" component={SettingsScreen} />
-        </Stack.Navigator> */}
-      // </NavigationContainer>
+        </Drawer.Navigator>
+      </NavigationContainer>
     );
   }
 }
