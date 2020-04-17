@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Image, Dimensions } from "react-native";
+import { View, Text, Image, Dimensions, ScrollView } from "react-native";
 import {
   Container,
   Content,
@@ -10,7 +10,9 @@ import {
   Body,
   Icon,
   Button,
-  ListItem,
+  Form,
+  Item,
+  Picker,
 } from "native-base";
 import Axios from "axios";
 import LoadingScreen from "./LoadingScreen";
@@ -20,27 +22,51 @@ const { width, height } = Dimensions.get("window");
 
 function DisasterScreen({ route, navigation }) {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(true);
+  const [district, setDistrict] = useState("");
+  const [districts, setDistricts] = useState([]);
+  const [tahsidar, setTahsildar] = useState([]);
+  const [collector, setCollector] = useState([]);
 
   async function dataFetch() {
-    try {
-      const { id } = route.params;
-      console.log(id);
-      await Axios.get("http://165.22.223.187:5000/disaster/details/" + id)
-        .then((res) => {
-          const data = res.data;
-          setData(data);
-          setLoading(false);
-          console.log(data);
-        })
-        .catch((error) => console.log("Error"));
-    } catch (e) {
-      navigation.navigate("Home");
-    }
+    const { id } = route.params;
+    await Axios.get("http://165.22.223.187:5000/disaster/details/" + id)
+      .then((res) => {
+        const data = res.data;
+        setData(data);
+      })
+      .catch((error) => console.log("Error"));
+
+    Axios.get("http://192.168.43.191:5000/tahsildarlist/list/districts").then(
+      (res) => {
+        let datas = res.data;
+        let uniqueDistricts = [];
+        datas.map((data) => {
+          if (uniqueDistricts.indexOf(data.district) === -1) {
+            uniqueDistricts.push(data.district);
+          }
+          return 0;
+        });
+        setDistricts(uniqueDistricts);
+        setDistrict(uniqueDistricts[0]);
+      }
+    );
+    setLoading(false);
   }
+
+  const handlePickerChange = async (value) => {
+    setDistrict(value);
+    await Axios.get("http://192.168.43.191:5000/collectorlist/" + value).then(
+      (res) => {
+        const data = res.data;
+        setCollector(data);
+      }
+    );
+  };
 
   useEffect(() => {
     dataFetch();
+    // console.log(district);
   }, []);
   if (loading) {
     return <LoadingScreen />;
@@ -70,20 +96,29 @@ function DisasterScreen({ route, navigation }) {
         </Right>
       </Header>
       <View style={{ margin: 10 }}>
-        <Text style={{ fontSize: 30, letterSpacing: 2, fontWeight: "bold" }}>
-          {data.disaster_name}
-        </Text>
-        <Text
+        <View
           style={{
-            fontSize: 15,
-            marginTop: 5,
-            letterSpacing: 2,
-            fontWeight: "bold",
+            justifyContent: "center",
+            alignItems: "center",
+            flex: 1,
+            marginTop: 25,
+            marginBottom: 25,
           }}
         >
-          {"(" + data.slug + ")"}
-        </Text>
-
+          <Text style={{ fontSize: 35, letterSpacing: 2, fontWeight: "bold" }}>
+            {data.disaster_name}
+          </Text>
+          <Text
+            style={{
+              fontSize: 15,
+              marginTop: 5,
+              letterSpacing: 2,
+              fontWeight: "bold",
+            }}
+          >
+            {"(" + data.slug + ")"}
+          </Text>
+        </View>
         <View style={{ marginTop: 20 }}>
           <Image
             style={{
@@ -104,6 +139,43 @@ function DisasterScreen({ route, navigation }) {
                 },
               ]}
             />
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: 40,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 20,
+                }}
+              >
+                Need Help?
+              </Text>
+              <Text
+                style={{
+                  fontSize: 15,
+                }}
+              >
+                Select your District
+              </Text>
+            </View>
+            <Picker
+              mode="dropdown"
+              iosIcon={<Icon name="arrow-down" />}
+              style={{ width: undefined, marginTop: 30 }}
+              placeholder="Select District"
+              placeholderStyle={{ color: "#bfc6ea" }}
+              placeholderIconColor="#007aff"
+              selectedValue={district}
+              onValueChange={handlePickerChange}
+            >
+              {districts.map(function (district) {
+                return <Picker.Item label={district} value={district} />;
+              })}
+            </Picker>
           </View>
         </View>
       </View>
