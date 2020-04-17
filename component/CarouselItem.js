@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { navigationRef } from "./RootNavigation.js";
 import * as RootNavigation from "../RootNavigation";
 
 const { width, height } = Dimensions.get("window");
