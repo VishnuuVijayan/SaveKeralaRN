@@ -14,6 +14,7 @@ import {
 // import Header from "../components/Header";
 
 function DisasterScreen({ navigation }, data) {
+  console.log(data.id);
   return (
     <Container>
       <Header>

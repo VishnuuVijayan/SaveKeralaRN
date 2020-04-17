@@ -1,20 +1,30 @@
 import React from "react";
-import { View, StyleSheet, Text, Image, Dimensions } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-// import { Navigation } from "react-native-navigation";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { navigationRef } from "./RootNavigation.js";
+import * as RootNavigation from "../RootNavigation";
 
 const { width, height } = Dimensions.get("window");
 
-const CarouselItem = ({ item }) => {
+const CarouselItem = ({ item }, props) => {
+  const id = item._id;
   return (
-    // <TouchableOpacity onPress = {Navigation.na}
-    <View style={styles.cardView}>
-      <Image style={styles.image} source={{ uri: item.imgsrc }} />
-      <View style={styles.textView}>
-        <Text style={styles.itemTitle}> {item.disaster_name}</Text>
-        <Text style={styles.itemDescription}>{item.slug}</Text>
+    <TouchableOpacity onPress={() => RootNavigation.navigate("Disaster", id)}>
+      <View style={styles.cardView}>
+        <Image style={styles.image} source={{ uri: item.imgsrc }} />
+        <View style={styles.textView}>
+          <Text style={styles.itemTitle}> {item.disaster_name}</Text>
+          <Text style={styles.itemDescription}>{item.slug}</Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
