@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, Image, Dimensions } from "react-native";
 import {
   Container,
   Content,
@@ -11,12 +11,36 @@ import {
   Icon,
   Button,
 } from "native-base";
-// import Header from "../components/Header";
+import Axios from "axios";
+import LoadingScreen from "./LoadingScreen";
 
-function DisasterScreen({ navigation }, data) {
-  console.log(data.id);
+const { width, height } = Dimensions.get("window");
+
+function DisasterScreen({ route, navigation }) {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState();
+
+  async function dataFetch() {
+    const { id } = route.params;
+    console.log(id);
+    await Axios.get("http://165.22.223.187:5000/disaster/details/" + id)
+      .then((res) => {
+        const data = res.data;
+        setData(data);
+        setLoading(false);
+        console.log(data);
+      })
+      .catch((error) => console.log("Error"));
+  }
+
+  useEffect(() => {
+    dataFetch();
+  }, []);
+  if (loading) {
+    return <LoadingScreen />;
+  }
   return (
-    <Container>
+    <Container style={{ backgroundColor: "#fafafa" }}>
       <Header>
         <Left>
           <Button transparent>
@@ -39,14 +63,42 @@ function DisasterScreen({ navigation }, data) {
           />
         </Right>
       </Header>
-      <Content
-        contentContainerStyle={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text> DisasterScreen</Text>
+      <Content style={{ margin: 10 }}>
+        <Text style={{ fontSize: 30, letterSpacing: 2, fontWeight: "bold" }}>
+          {data.disaster_name}
+        </Text>
+        <Text
+          style={{
+            fontSize: 15,
+            marginTop: 5,
+            letterSpacing: 2,
+            fontWeight: "bold",
+          }}
+        >
+          {"(" + data.slug + ")"}
+        </Text>
+        <View style={{ marginTop: 20 }}>
+          <Image
+            style={{
+              width,
+              maxWidth: width - 20,
+              height,
+              maxHeight: height / 3,
+              borderRadius: 10,
+            }}
+            source={{ uri: data.imgsrc }}
+          />
+          <Text
+            style={{
+              textAlign: "justify",
+              fontSize: 16,
+              marginTop: 15,
+              lineHeight: 25,
+            }}
+          >
+            {data.description}
+          </Text>
+        </View>
       </Content>
     </Container>
   );
