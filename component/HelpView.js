@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import Axios from "axios";
 import LoadingScreen from "../screens/LoadingScreen";
+import moduleName from "react-native-vector-icons";
 import {
   Container,
   Content,
@@ -12,6 +13,7 @@ import {
   Title,
   ListItem,
   List,
+  Icon,
   Text,
 } from "native-base";
 
@@ -59,12 +61,16 @@ function HelpView() {
           <ListItem itemHeader first>
             <Text>District Collector</Text>
           </ListItem>
-          <ListItem>
+          <ListItem style={{ flex: 1, justifyContent: "space-between" }}>
             <Text>
               {collector[0].collector_fname +
                 " " +
                 collector[0].collector_lname}
             </Text>
+            <Icon
+              name="arrow-forward"
+              style={{ color: "lightgrey", fontSize: 18 }}
+            />
           </ListItem>
 
           <ListItem itemHeader style={{ marginTop: 30 }}>
@@ -72,8 +78,16 @@ function HelpView() {
           </ListItem>
           {tahsildar.map((item) => {
             return (
-              <ListItem key={item._id}>
+              <ListItem
+                key={item._id}
+                style={{ flex: 1, justifyContent: "space-between" }}
+              >
                 <Text>{item.taluk}</Text>
+                <Icon
+                  key={item._id}
+                  name="arrow-forward"
+                  style={{ color: "lightgrey", fontSize: 18 }}
+                />
               </ListItem>
             );
           })}
@@ -82,8 +96,15 @@ function HelpView() {
           </ListItem>
           {secretary.map((item) => {
             return (
-              <ListItem key={item._id}>
+              <ListItem
+                key={item._id}
+                style={{ flex: 1, justifyContent: "space-between" }}
+              >
                 <Text>{item.panchayat}</Text>
+                <Icon
+                  name="arrow-forward"
+                  style={{ color: "lightgrey", fontSize: 18 }}
+                />
               </ListItem>
             );
           })}
