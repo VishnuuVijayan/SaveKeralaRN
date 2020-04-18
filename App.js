@@ -12,6 +12,7 @@ import LoadingScreen from "./screens/LoadingScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { navigationRef } from "./RootNavigation";
+import HelpView from "./component/HelpView";
 
 const Drawer = createDrawerNavigator();
 
@@ -55,6 +56,7 @@ function StackNavigator() {
         }}
         component={HomeScreen}
       />
+      <Stack.Screen name="Test" component={HelpView} />
       <Stack.Screen
         name="Disaster"
         component={DisasterScreen}

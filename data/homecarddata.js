@@ -11,7 +11,7 @@ export const cards = [
     key: 2,
     heading: "Collection Centers",
     content: "",
-    btnRoute: "Home",
+    btnRoute: "Test",
     image:
       "https://st3.depositphotos.com/6778576/14709/v/1600/depositphotos_147091501-stock-illustration-map-location-icon.jpg",
   },

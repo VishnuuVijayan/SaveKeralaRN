@@ -17,6 +17,7 @@ import {
 import Axios from "axios";
 import LoadingScreen from "./LoadingScreen";
 import Accordion from "../component/Accordion";
+import HelpView from "../component/HelpView";
 
 const { width, height } = Dimensions.get("window");
 
@@ -37,7 +38,7 @@ function DisasterScreen({ route, navigation }) {
       })
       .catch((error) => console.log("Error"));
 
-    Axios.get("http://192.168.43.191:5000/tahsildarlist/list/districts").then(
+    Axios.get("http://165.22.223.187:5000/tahsildarlist/list/districts").then(
       (res) => {
         let datas = res.data;
         let uniqueDistricts = [];
@@ -56,7 +57,7 @@ function DisasterScreen({ route, navigation }) {
 
   const handlePickerChange = async (value) => {
     setDistrict(value);
-    await Axios.get("http://192.168.43.191:5000/collectorlist/" + value).then(
+    await Axios.get("http://165.22.223.187:5000/collectorlist/" + value).then(
       (res) => {
         const data = res.data;
         setCollector(data);
@@ -173,10 +174,17 @@ function DisasterScreen({ route, navigation }) {
               onValueChange={handlePickerChange}
             >
               {districts.map(function (district) {
-                return <Picker.Item label={district} value={district} />;
+                return (
+                  <Picker.Item
+                    key={district}
+                    label={district}
+                    value={district}
+                  />
+                );
               })}
             </Picker>
           </View>
+          <HelpView />
         </View>
       </View>
     </Container>
