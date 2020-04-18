@@ -16,9 +16,10 @@ import {
 } from "native-base";
 
 function HelpView() {
-  const [collector, setCollector] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [collector, setCollector] = useState([]);
   const [tahsildar, setTahsildar] = useState([]);
+  const [secretary, setSecretary] = useState([]);
 
   const dataFetch = async () => {
     await Axios.get("http://165.22.223.187:5000/collectorlist/Palakkad")
@@ -31,6 +32,12 @@ function HelpView() {
       (res) => {
         const data = res.data;
         setTahsildar(data);
+      }
+    );
+    await Axios.get("http://165.22.223.187:5000/secretary/Palakkad").then(
+      (res) => {
+        const data = res.data;
+        setSecretary(data);
         setLoading(false);
       }
     );
@@ -60,13 +67,23 @@ function HelpView() {
             </Text>
           </ListItem>
 
-          <ListItem itemHeader>
+          <ListItem itemHeader style={{ marginTop: 30 }}>
             <Text>Tahsildar </Text>
           </ListItem>
           {tahsildar.map((item) => {
             return (
-              <ListItem key={item.taluk}>
+              <ListItem key={item._id}>
                 <Text>{item.taluk}</Text>
+              </ListItem>
+            );
+          })}
+          <ListItem itemHeader style={{ marginTop: 30 }}>
+            <Text>Grama Panchayat Secretaries </Text>
+          </ListItem>
+          {secretary.map((item) => {
+            return (
+              <ListItem key={item._id}>
+                <Text>{item.panchayat}</Text>
               </ListItem>
             );
           })}
