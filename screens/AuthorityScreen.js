@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Dimensions } from "react-native";
+import { View, Text, Dimensions, TouchableOpacity } from "react-native";
 import {
   Container,
   Header,
@@ -20,7 +20,10 @@ import LoadingScreen from "./LoadingScreen";
 const { height } = Dimensions.get("window");
 
 const AuthorityScreen = ({ route, navigation }) => {
+  const { id, type } = route.params;
+  // const [collector, setCollector] = useState([]);
   const [data, setData] = useState([]);
+  // const [secretary, setSeecretary] = useState([]);
   const [loading, setLoading] = useState(true);
   const dataFetch = async () => {
     const { id, type } = route.params;
@@ -37,6 +40,7 @@ const AuthorityScreen = ({ route, navigation }) => {
             setLoading(false);
           })
           .catch((err) => console.log("Error" + err));
+        break;
       }
       case "B": {
         await Axios.get(
@@ -47,6 +51,7 @@ const AuthorityScreen = ({ route, navigation }) => {
           console.log(data);
           setLoading(false);
         });
+        break;
       }
       case "C": {
         await Axios.get(
@@ -57,6 +62,7 @@ const AuthorityScreen = ({ route, navigation }) => {
           console.log(data);
           setLoading(false);
         });
+        break;
       }
     }
   };
@@ -98,23 +104,174 @@ const AuthorityScreen = ({ route, navigation }) => {
       >
         <Card>
           <CardItem header bordered>
-            <Text>NativeBase</Text>
+            <Text
+              style={{
+                textTransform: "uppercase",
+                fontSize: 22,
+                letterSpacing: 2,
+                textAlign: "center",
+              }}
+            >
+              {type === "A"
+                ? data.district + " District Collector Details"
+                : type === "B"
+                ? "Tahsildar Details"
+                : "Grama Panchayat Secretary Details"}
+            </Text>
           </CardItem>
           <CardItem bordered>
-            <Body>
-              <Text>
-                NativeBase is a free and open source framework that enable
-                developers to build high-quality mobile apps using React Native
-                iOS and Android apps with a fusion of ES6.
-              </Text>
-            </Body>
+            {type === "A" ? (
+              <Collector data={data} />
+            ) : type == "B" ? (
+              <Tahsildar data={data} />
+            ) : (
+              <Secretary data={data} />
+            )}
           </CardItem>
-          <CardItem footer bordered>
-            <Text>GeekyAnts</Text>
-          </CardItem>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("help", { district: data.district })
+            }
+          >
+            <CardItem footer bordered style={{ justifyContent: "center" }}>
+              <Text>Go Back</Text>
+            </CardItem>
+          </TouchableOpacity>
         </Card>
       </Content>
     </Container>
+  );
+};
+
+const Collector = ({ data }) => {
+  return (
+    <Body>
+      <Text
+        style={{
+          fontSize: 18,
+          textAlign: "center",
+          letterSpacing: 1,
+        }}
+      >
+        Collector Name : {data.collector_fname + " " + data.collector_lname}
+      </Text>
+      <Text
+        style={{
+          fontSize: 18,
+          textAlign: "center",
+          letterSpacing: 1,
+          marginTop: 10,
+        }}
+      >
+        Contact Number : {data.contact}
+      </Text>
+      <Text
+        style={{
+          fontSize: 18,
+          textAlign: "center",
+          letterSpacing: 1,
+          marginTop: 10,
+          marginBottom: 10,
+        }}
+      >
+        E-mail : {data.email}
+      </Text>
+    </Body>
+  );
+};
+
+const Tahsildar = ({ data }) => {
+  return (
+    <Body>
+      <Text
+        style={{
+          fontSize: 18,
+          textAlign: "center",
+          letterSpacing: 1,
+        }}
+      >
+        Tahsildar Name : {data.t_fname + " " + data.t_lname}
+      </Text>
+      <Text
+        style={{
+          fontSize: 18,
+          textAlign: "center",
+          letterSpacing: 1,
+          marginTop: 10,
+        }}
+      >
+        Contact Number : {data.contact}
+      </Text>
+      <Text
+        style={{
+          fontSize: 18,
+          textAlign: "center",
+          letterSpacing: 1,
+          marginTop: 10,
+        }}
+      >
+        Taluk : {data.taluk}
+      </Text>
+      <Text
+        style={{
+          fontSize: 18,
+          textAlign: "center",
+          letterSpacing: 1,
+          marginTop: 10,
+          marginBottom: 10,
+        }}
+      >
+        District : {data.district}
+      </Text>
+    </Body>
+  );
+};
+
+const Secretary = ({ data }) => {
+  return (
+    <Body>
+      <Text
+        style={{
+          fontSize: 18,
+          lineHeight: 25,
+          letterSpacing: 1,
+        }}
+      >
+        Secretary Name : {data.secratary_name}
+      </Text>
+      <Text
+        style={{
+          fontSize: 18,
+          textAlign: "center",
+          letterSpacing: 1,
+          marginTop: 10,
+        }}
+      >
+        Contact Number : {data.contact}
+      </Text>
+      <Text
+        style={{
+          fontSize: 18,
+          textAlign: "center",
+          letterSpacing: 1,
+          marginTop: 10,
+        }}
+      >
+        E-mail : {data.email}
+      </Text>
+      <Text
+        style={{
+          fontSize: 18,
+          textAlign: "center",
+          letterSpacing: 1,
+          marginBottom: 10,
+          marginBottom: 10,
+          marginTop: 10,
+        }}
+      >
+        Grama Panchayat : {data.panchayat}
+      </Text>
+    </Body>
   );
 };
 

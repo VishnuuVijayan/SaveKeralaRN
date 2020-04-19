@@ -19,26 +19,29 @@ import {
 } from "native-base";
 import { navigationRef } from "../RootNavigation";
 
-function HelpView({ navigation }) {
+function HelpView({ navigation, route }) {
   const [loading, setLoading] = useState(true);
   const [collector, setCollector] = useState([]);
   const [tahsildar, setTahsildar] = useState([]);
   const [secretary, setSecretary] = useState([]);
 
   const dataFetch = async () => {
-    await Axios.get("http://165.22.223.187:5000/collectorlist/Palakkad")
+    const { district } = route.params;
+
+    console.log(district);
+    await Axios.get("http://165.22.223.187:5000/collectorlist/" + district)
       .then((res) => {
         const data = res.data;
         setCollector(data);
       })
       .catch((error) => console.log("Error"));
-    await Axios.get("http://165.22.223.187:5000/tahsildarlist/Palakkad").then(
-      (res) => {
-        const data = res.data;
-        setTahsildar(data);
-      }
-    );
-    await Axios.get("http://165.22.223.187:5000/secretary/Palakkad").then(
+    await Axios.get(
+      "http://165.22.223.187:5000/tahsildarlist/" + district
+    ).then((res) => {
+      const data = res.data;
+      setTahsildar(data);
+    });
+    await Axios.get("http://165.22.223.187:5000/secretary/" + district).then(
       (res) => {
         const data = res.data;
         setSecretary(data);

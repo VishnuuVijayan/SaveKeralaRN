@@ -183,8 +183,39 @@ function DisasterScreen({ route, navigation }) {
                 );
               })}
             </Picker>
+            <View
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: 20,
+              }}
+            >
+              <Button
+                primary
+                style={{
+                  justifyContent: "center",
+                  borderRadius: 5,
+                  width: width / 3,
+                }}
+                onPress={() =>
+                  navigation.navigate("help", {
+                    district: district,
+                  })
+                }
+              >
+                <Text
+                  style={{
+                    color: "#fff",
+                    fontSize: 17,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {" "}
+                  Get Help{" "}
+                </Text>
+              </Button>
+            </View>
           </View>
-          <HelpView />
         </View>
       </View>
     </Container>
