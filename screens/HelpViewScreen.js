@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import Axios from "axios";
-import LoadingScreen from "../screens/LoadingScreen";
+import LoadingScreen from "./LoadingScreen";
 import moduleName from "react-native-vector-icons";
 import {
   Container,
@@ -14,10 +14,12 @@ import {
   ListItem,
   List,
   Icon,
+  Button,
   Text,
 } from "native-base";
+import { navigationRef } from "../RootNavigation";
 
-function HelpView() {
+function HelpView({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [collector, setCollector] = useState([]);
   const [tahsildar, setTahsildar] = useState([]);
@@ -55,13 +57,43 @@ function HelpView() {
   }
 
   return (
-    <Container style={{ margin: 10 }}>
+    <Container>
+      <Header>
+        <Left>
+          <Button transparent>
+            <Icon
+              name="ios-menu"
+              style={{ color: "#fff" }}
+              onPress={() => navigation.openDrawer()}
+            />
+          </Button>
+        </Left>
+        <Body>
+          <Title>Details</Title>
+        </Body>
+        <Body />
+        <Right>
+          <Icon
+            name="home"
+            style={{ color: "#fff", paddingRight: 10 }}
+            onPress={() => navigation.navigate("Home")}
+          />
+        </Right>
+      </Header>
       <Content>
         <List>
           <ListItem itemHeader first>
             <Text>District Collector</Text>
           </ListItem>
-          <ListItem style={{ flex: 1, justifyContent: "space-between" }}>
+          <ListItem
+            onPress={() =>
+              navigation.navigate("contact", {
+                id: collector[0]._id,
+                type: "A",
+              })
+            }
+            style={{ flex: 1, justifyContent: "space-between" }}
+          >
             <Text>
               {collector[0].collector_fname +
                 " " +
@@ -79,6 +111,12 @@ function HelpView() {
           {tahsildar.map((item) => {
             return (
               <ListItem
+                onPress={() =>
+                  navigation.navigate("contact", {
+                    id: item._id,
+                    type: "B",
+                  })
+                }
                 key={item._id}
                 style={{ flex: 1, justifyContent: "space-between" }}
               >
@@ -97,6 +135,12 @@ function HelpView() {
           {secretary.map((item) => {
             return (
               <ListItem
+                onPress={() =>
+                  navigation.navigate("contact", {
+                    id: item._id,
+                    type: "C",
+                  })
+                }
                 key={item._id}
                 style={{ flex: 1, justifyContent: "space-between" }}
               >

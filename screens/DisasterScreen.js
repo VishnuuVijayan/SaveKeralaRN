@@ -17,7 +17,7 @@ import {
 import Axios from "axios";
 import LoadingScreen from "./LoadingScreen";
 import Accordion from "../component/Accordion";
-import HelpView from "../component/HelpView";
+// import HelpView from "./HelpViewScreen";
 
 const { width, height } = Dimensions.get("window");
 

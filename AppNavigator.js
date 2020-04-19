@@ -12,7 +12,8 @@ import LoadingScreen from "./screens/LoadingScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { navigationRef } from "./RootNavigation";
-import HelpView from "./component/HelpView";
+import HelpView from "./screens/HelpViewScreen";
+import AuthorityScreen from "./screens/AuthorityScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -57,10 +58,23 @@ function StackNavigator() {
         component={HomeScreen}
       />
 
-      <Stack.Screen name="Test" component={HelpView} />
+      <Stack.Screen
+        name="help"
+        options={{
+          headerShown: false,
+        }}
+        component={HelpView}
+      />
       <Stack.Screen
         name="Disaster"
         component={DisasterScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="contact"
+        component={AuthorityScreen}
         options={{
           headerShown: false,
         }}
