@@ -3,10 +3,11 @@ import { View } from "react-native";
 import Axios from "axios";
 import LoadingScreen from "./LoadingScreen";
 import moduleName from "react-native-vector-icons";
+import Header from "../component/Header";
 import {
   Container,
   Content,
-  Header,
+  // Header,
   Left,
   Right,
   Body,
@@ -61,28 +62,7 @@ function HelpView({ navigation, route }) {
 
   return (
     <Container>
-      <Header>
-        <Left>
-          <Button transparent>
-            <Icon
-              name="ios-menu"
-              style={{ color: "#fff" }}
-              onPress={() => navigation.openDrawer()}
-            />
-          </Button>
-        </Left>
-        <Body>
-          <Title>Details</Title>
-        </Body>
-        <Body />
-        <Right>
-          <Icon
-            name="home"
-            style={{ color: "#fff", paddingRight: 10 }}
-            onPress={() => navigation.navigate("Home")}
-          />
-        </Right>
-      </Header>
+      <Header name="Get Help" />
       <Content>
         <List>
           <ListItem itemHeader first>

@@ -4,7 +4,7 @@ import { View, Image, StyleSheet } from "react-native";
 import {
   Container,
   Content,
-  Header,
+  // Header,
   Left,
   Right,
   Icon,
@@ -20,6 +20,7 @@ import {
 import Carousel from "../component/Carousel";
 import { dummyData } from "../data/Data";
 import { cards } from "../data/homecarddata";
+import Header from "../component/Header";
 
 import Axios from "axios";
 import LoadingScreen from "./LoadingScreen";
@@ -51,22 +52,7 @@ function HomeScreen({ navigation }) {
   }
   return (
     <Container>
-      <Header>
-        <Left>
-          <Button transparent>
-            <Icon
-              name="ios-menu"
-              style={{ color: "#fff" }}
-              onPress={() => navigation.openDrawer()}
-            />
-          </Button>
-        </Left>
-        <Body>
-          <Title> Home</Title>
-        </Body>
-        <Body />
-        <Right />
-      </Header>
+      <Header name="Home" type="A" />
       <Content
       // contentContainerStyle={{
       //   flex: 1,

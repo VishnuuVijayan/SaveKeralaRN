@@ -3,7 +3,7 @@ import { View, Text, Image, Dimensions, ScrollView } from "react-native";
 import {
   Container,
   Content,
-  Header,
+  // Header,
   Right,
   Left,
   Title,
@@ -14,9 +14,12 @@ import {
   Item,
   Picker,
 } from "native-base";
+import Header from "../component/Header";
+
 import Axios from "axios";
 import LoadingScreen from "./LoadingScreen";
 import Accordion from "../component/Accordion";
+import { DrawerActions } from "@react-navigation/native";
 // import HelpView from "./HelpViewScreen";
 
 const { width, height } = Dimensions.get("window");
@@ -74,28 +77,7 @@ function DisasterScreen({ route, navigation }) {
   }
   return (
     <Container style={{ backgroundColor: "#fafafa" }}>
-      <Header>
-        <Left>
-          <Button transparent>
-            <Icon
-              name="ios-menu"
-              style={{ color: "#fff" }}
-              onPress={() => navigation.openDrawer()}
-            />
-          </Button>
-        </Left>
-        <Body>
-          <Title>Details</Title>
-        </Body>
-        <Body />
-        <Right>
-          <Icon
-            name="home"
-            style={{ color: "#fff", paddingRight: 10 }}
-            onPress={() => navigation.navigate("Home")}
-          />
-        </Right>
-      </Header>
+      <Header name="Details" />
       <View style={{ margin: 10 }}>
         <View
           style={{

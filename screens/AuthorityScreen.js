@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Dimensions, TouchableOpacity } from "react-native";
 import {
   Container,
-  Header,
+  // Header,
   Icon,
   Button,
   Left,
@@ -14,6 +14,8 @@ import {
   CardItem,
 } from "native-base";
 import Axios from "axios";
+import Header from "../component/Header";
+
 import { setProvidesAudioData } from "expo/build/AR";
 import LoadingScreen from "./LoadingScreen";
 
@@ -76,28 +78,7 @@ const AuthorityScreen = ({ route, navigation }) => {
   }
   return (
     <Container>
-      <Header>
-        <Left>
-          <Button transparent>
-            <Icon
-              name="ios-menu"
-              style={{ color: "#fff" }}
-              onPress={() => navigation.openDrawer()}
-            />
-          </Button>
-        </Left>
-        <Body>
-          <Title>Details</Title>
-        </Body>
-        <Body />
-        <Right>
-          <Icon
-            name="home"
-            style={{ color: "#fff", paddingRight: 10 }}
-            onPress={() => navigation.navigate("Home")}
-          />
-        </Right>
-      </Header>
+      <Header name="Contact Details" />
       <Content
         padder
         contentContainerStyle={{ flex: 1, justifyContent: "center" }}

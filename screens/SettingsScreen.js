@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import {
   Container,
   Content,
-  Header,
+  // Header,
   Right,
   Left,
   Title,
@@ -11,32 +11,12 @@ import {
   Icon,
   Button,
 } from "native-base";
+import Header from "../component/Header";
 
 const SettingsScreen = ({ navigation }) => {
   return (
     <Container>
-      <Header>
-        <Left>
-          <Button transparent>
-            <Icon
-              name="ios-menu"
-              style={{ color: "#fff" }}
-              onPress={() => navigation.openDrawer()}
-            />
-          </Button>
-        </Left>
-        <Body>
-          <Title>Details</Title>
-        </Body>
-        <Body />
-        <Right>
-          <Icon
-            name="home"
-            style={{ color: "#fff", paddingRight: 10 }}
-            onPress={() => navigation.navigate("Home")}
-          />
-        </Right>
-      </Header>
+      <Header name="Settings" />
       <Content
         contentContainerStyle={{
           flex: 1,
