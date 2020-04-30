@@ -3,7 +3,7 @@ export const cards = [
     key: 1,
     heading: "Request For Resources",
     content: "",
-    btnRoute: "Settings",
+    btnRoute: "",
     image:
       "https://cdn2.iconfinder.com/data/icons/antto-basic-1/450/request-512.png",
   },
@@ -11,7 +11,7 @@ export const cards = [
     key: 2,
     heading: "Collection Centers",
     content: "",
-    btnRoute: "help",
+    btnRoute: "",
     image:
       "https://st3.depositphotos.com/6778576/14709/v/1600/depositphotos_147091501-stock-illustration-map-location-icon.jpg",
   },
@@ -26,7 +26,7 @@ export const cards = [
     key: 4,
     heading: "Volunteer Registration",
     content: "",
-    btnRoute: "Home",
+    btnRoute: "",
     image:
       "https://cdn5.vectorstock.com/i/1000x1000/15/44/helping-hands-vector-1421544.jpg",
   },

@@ -13,6 +13,7 @@ import {
 import * as RootNavigation from "../RootNavigation";
 
 const AppHeader = (props) => {
+  const navigation = props.navigation;
   return (
     <Header>
       <Left>
@@ -20,7 +21,7 @@ const AppHeader = (props) => {
           <Icon
             name="ios-menu"
             style={{ color: "#fff" }}
-            onPress={() => RootNavigation.navigate.openDrawer()}
+            onPress={() => navigation.openDrawer()}
           />
         </Button>
       </Left>
@@ -28,7 +29,7 @@ const AppHeader = (props) => {
         <Title>{props.name}</Title>
       </Body>
       <Body />
-      {props.type === "A" ? (
+      {props.type !== "A" ? (
         <Right>
           <Icon
             name="home"

@@ -77,7 +77,7 @@ function DisasterScreen({ route, navigation }) {
   }
   return (
     <Container style={{ backgroundColor: "#fafafa" }}>
-      <Header name="Details" />
+      <Header name="Details" navigation={navigation} />
       <View style={{ margin: 10 }}>
         <View
           style={{

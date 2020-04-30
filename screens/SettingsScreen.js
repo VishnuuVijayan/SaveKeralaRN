@@ -16,7 +16,7 @@ import Header from "../component/Header";
 const SettingsScreen = ({ navigation }) => {
   return (
     <Container>
-      <Header name="Settings" />
+      <Header name="Settings" navigation={navigation} />
       <Content
         contentContainerStyle={{
           flex: 1,

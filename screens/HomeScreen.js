@@ -52,7 +52,7 @@ function HomeScreen({ navigation }) {
   }
   return (
     <Container>
-      <Header name="Home" type="A" />
+      <Header name="Home" navigation={navigation} />
       <Content
       // contentContainerStyle={{
       //   flex: 1,

@@ -62,7 +62,7 @@ function HelpView({ navigation, route }) {
 
   return (
     <Container>
-      <Header name="Get Help" />
+      <Header name="Get Help" navigation={navigation} />
       <Content>
         <List>
           <ListItem itemHeader first>
