@@ -45,7 +45,6 @@ const EmergencyScreen = ({ navigation }) => {
     Axios.get("http://165.22.223.187:5000/disaster/").then((res) => {
       let datas = res.data;
       setDisasters(datas);
-      console.log(disasters);
     });
     setLoading(false);
   };
@@ -135,7 +134,6 @@ const EmergencyScreen = ({ navigation }) => {
             <Label>Exact Location...</Label>
             <Input />
           </Item>
-          <Item picker></Item>
         </Form>
       </Content>
     </Container>
