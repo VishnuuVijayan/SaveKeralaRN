@@ -1,9 +1,9 @@
 export const cards = [
   {
     key: 1,
-    heading: "Request For Resources",
+    heading: "Report an Emergency",
     content: "",
-    btnRoute: "",
+    btnRoute: "Emergency",
     image:
       "https://cdn2.iconfinder.com/data/icons/antto-basic-1/450/request-512.png",
   },
