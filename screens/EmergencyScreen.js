@@ -13,6 +13,7 @@ import {
 import Header from "../component/Header";
 import LoadingScreen from "./LoadingScreen";
 import Axios from "axios";
+import { LOcation, Permissions } from "expo";
 
 const EmergencyScreen = ({ navigation }) => {
   const [picker, setPicker] = React.useState("Select District...");
@@ -23,9 +24,21 @@ const EmergencyScreen = ({ navigation }) => {
   const [disaster, setDisaster] = React.useState("");
   const [disasters, setDisasters] = React.useState([]);
   const [service, setService] = React.useState("");
+  const [location, setLocation] = React.useState();
   React.useEffect(() => {
     dataFetch();
+    _getLocation();
   }, []);
+
+  _getLocation = async () => {
+    const { status } = await Permissions.askAsync(Permissions.LOCATION);
+
+    if (status !== "granted") {
+      console.log("Permission Denied!!");
+    }
+    const userLocation = await Location.getCurrentPositionAsync();
+    setLocation(userLocation);
+  };
 
   const dataFetch = async () => {
     await Axios.get(
