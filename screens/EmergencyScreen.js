@@ -13,8 +13,7 @@ import {
 import Header from "../component/Header";
 import LoadingScreen from "./LoadingScreen";
 import Axios from "axios";
-import * as Location from "expo-location";
-import * as Permissions from "expo-permissions";
+import { LOcation, Permissions } from "expo";
 
 const EmergencyScreen = ({ navigation }) => {
   const [picker, setPicker] = React.useState("Select District...");
