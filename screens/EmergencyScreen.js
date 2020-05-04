@@ -9,7 +9,9 @@ import {
   Input,
   Picker,
   Icon,
+  Button,
 } from "native-base";
+import { MaterialIcons } from "@expo/vector-icons";
 import Header from "../component/Header";
 import LoadingScreen from "./LoadingScreen";
 import Axios from "axios";
@@ -25,20 +27,25 @@ const EmergencyScreen = ({ navigation }) => {
   const [disaster, setDisaster] = React.useState("");
   const [disasters, setDisasters] = React.useState([]);
   const [service, setService] = React.useState("");
-  const [location, setLocation] = React.useState();
+  const [location, setLocation] = React.useState({});
   React.useEffect(() => {
     dataFetch();
-    _getLocation();
   }, []);
 
-  _getLocation = async () => {
+  getLocation = async () => {
     const { status } = await Permissions.askAsync(Permissions.LOCATION);
 
     if (status !== "granted") {
       console.log("Permission Denied!!");
     }
-    const userLocation = await Location.getCurrentPositionAsync();
-    setLocation(userLocation);
+    const userLocation = await Location.getCurrentPositionAsync({
+      enableHighAccuracy: true,
+    });
+    await setLocation({
+      latitude: userLocation.coords.latitude,
+      longitude: userLocation.coords.longitude,
+    });
+    await console.log(location);
   };
 
   const dataFetch = async () => {
@@ -144,10 +151,42 @@ const EmergencyScreen = ({ navigation }) => {
             <Label>Phone Number...</Label>
             <Input />
           </Item>
-          <Item floatingLabel last>
-            <Label>Exact Location...</Label>
-            <Input />
-          </Item>
+          {/* <Text style={{ fontSize: 20, marginTop: 20, letterSpacing: 1 }}>
+            Location
+          </Text> */}
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 30,
+            }}
+          >
+            <Button
+              style={{
+                width: 250,
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: 20,
+              }}
+              onPress={() => getLocation}
+            >
+              <MaterialIcons
+                name="gps-fixed"
+                style={{ color: "#fff", fontSize: 15, marginRight: 5 }}
+              />
+              <Text
+                style={{
+                  color: "#fff",
+                  fontSize: 15,
+                  textTransform: "uppercase",
+                }}
+              >
+                Get my current location
+              </Text>
+            </Button>
+          </View>
         </Form>
       </Content>
     </Container>

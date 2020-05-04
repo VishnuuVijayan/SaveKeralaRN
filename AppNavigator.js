@@ -14,6 +14,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { navigationRef } from "./RootNavigation";
 import HelpView from "./screens/HelpViewScreen";
 import AuthorityScreen from "./screens/AuthorityScreen";
+import EmergencyScreen from "./screens/EmergencyScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -38,6 +39,10 @@ class AppNavigator extends Component {
       <NavigationContainer ref={navigationRef}>
         <Drawer.Navigator initialRouteName="Home">
           <Drawer.Screen name="Home" children={StackNavigator} />
+          <Drawer.Screen
+            name="Report an Emergency"
+            children={EmergencyScreen}
+          />
           <Drawer.Screen name="Settings" component={SettingsScreen} />
         </Drawer.Navigator>
       </NavigationContainer>
@@ -64,6 +69,13 @@ function StackNavigator() {
           headerShown: false,
         }}
         component={HelpView}
+      />
+      <Stack.Screen
+        name="emergency"
+        options={{
+          headerShown: false,
+        }}
+        component={EmergencyScreen}
       />
       <Stack.Screen
         name="Disaster"
