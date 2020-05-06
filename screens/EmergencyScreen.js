@@ -6,6 +6,7 @@ import {
   Form,
   Item,
   Label,
+  Textarea,
   Icon,
   Input,
   Picker,
@@ -21,8 +22,6 @@ import * as Permissions from "expo-permissions";
 import { TouchableHighlight } from "react-native-gesture-handler";
 
 const EmergencyScreen = ({ navigation }) => {
-  scaleInAnimated = new Animated.Value(0);
-  scaleOutAnimated = new Animated.Value(0);
   const [picker, setPicker] = React.useState("Select District...");
   const [secondPicker, setsecondPicker] = React.useState("Select category...");
   const [loading, setLoading] = React.useState(true);
@@ -31,6 +30,9 @@ const EmergencyScreen = ({ navigation }) => {
   const [disaster, setDisaster] = React.useState("");
   const [disasters, setDisasters] = React.useState([]);
   const [service, setService] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [contact, setContact] = React.useState("");
+  const [addMsg, setAddMsg] = React.useState("");
   const [location, setLocation] = React.useState({
     latitude: null,
     longitude: null,
@@ -83,6 +85,7 @@ const EmergencyScreen = ({ navigation }) => {
   onSubmit = () => {
     console.log("Form submitted");
     console.log(location);
+    console.log(name);
   };
 
   return (
@@ -158,24 +161,49 @@ const EmergencyScreen = ({ navigation }) => {
           </Picker>
           <Item floatingLabel last>
             <Label>Your Name...</Label>
-            <Input />
+            <Input
+              value={name}
+              onChange={(val) => {
+                setName(val.nativeEvent.text);
+              }}
+            />
           </Item>
           <Item floatingLabel last>
             <Label>Phone Number...</Label>
-            <Input />
+            <Input onChange={(value) => setContact(value.nativeEvent.text)} />
           </Item>
-
           <Item floatingLabel last>
-            <Label>Location</Label>
-            <Input />
-            <Icon
+            <Label>Additional Messages</Label>
+            <Input onChange={(value) => setAddMsg(value.nativeEvent.text)} />
+          </Item>
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          >
+            <Button
               onPress={async () => {
                 await getLocation();
               }}
-              name="gps-fixed"
-              type="MaterialIcons"
-            />
-          </Item>
+              style={{
+                width: 200,
+                borderRadius: 10,
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: 10,
+              }}
+            >
+              <Icon name="gps-fixed" type="MaterialIcons" />
+              <Text
+                style={{
+                  color: "#fff",
+                  fontSize: 15,
+                  textTransform: "uppercase",
+                }}
+              >
+                location
+              </Text>
+            </Button>
+          </View>
 
           <View
             style={{
