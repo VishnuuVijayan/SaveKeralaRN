@@ -1,15 +1,16 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Animated, TouchableOpacity } from "react-native";
 import {
   Container,
   Content,
   Form,
   Item,
   Label,
+  Icon,
   Input,
   Picker,
-  Icon,
   Button,
+  Right,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import Header from "../component/Header";
@@ -17,8 +18,11 @@ import LoadingScreen from "./LoadingScreen";
 import Axios from "axios";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 const EmergencyScreen = ({ navigation }) => {
+  scaleInAnimated = new Animated.Value(0);
+  scaleOutAnimated = new Animated.Value(0);
   const [picker, setPicker] = React.useState("Select District...");
   const [secondPicker, setsecondPicker] = React.useState("Select category...");
   const [loading, setLoading] = React.useState(true);
@@ -27,7 +31,10 @@ const EmergencyScreen = ({ navigation }) => {
   const [disaster, setDisaster] = React.useState("");
   const [disasters, setDisasters] = React.useState([]);
   const [service, setService] = React.useState("");
-  const [location, setLocation] = React.useState({});
+  const [location, setLocation] = React.useState({
+    latitude: null,
+    longitude: null,
+  });
   React.useEffect(() => {
     dataFetch();
   }, []);
@@ -37,15 +44,15 @@ const EmergencyScreen = ({ navigation }) => {
 
     if (status !== "granted") {
       console.log("Permission Denied!!");
+    } else {
+      const userLocation = await Location.getCurrentPositionAsync({
+        enableHighAccuracy: true,
+      });
+      await setLocation({
+        latitude: userLocation.coords.latitude,
+        longitude: userLocation.coords.longitude,
+      });
     }
-    const userLocation = await Location.getCurrentPositionAsync({
-      enableHighAccuracy: true,
-    });
-    await setLocation({
-      latitude: userLocation.coords.latitude,
-      longitude: userLocation.coords.longitude,
-    });
-    await console.log(location);
   };
 
   const dataFetch = async () => {
@@ -72,6 +79,12 @@ const EmergencyScreen = ({ navigation }) => {
   if (loading) {
     return <LoadingScreen />;
   }
+
+  onSubmit = () => {
+    console.log("Form submitted");
+    console.log(location);
+  };
+
   return (
     <Container>
       <Header name="Emergency" navigation={navigation} />
@@ -151,9 +164,19 @@ const EmergencyScreen = ({ navigation }) => {
             <Label>Phone Number...</Label>
             <Input />
           </Item>
-          {/* <Text style={{ fontSize: 20, marginTop: 20, letterSpacing: 1 }}>
-            Location
-          </Text> */}
+
+          <Item floatingLabel last>
+            <Label>Location</Label>
+            <Input />
+            <Icon
+              onPress={async () => {
+                await getLocation();
+              }}
+              name="gps-fixed"
+              type="MaterialIcons"
+            />
+          </Item>
+
           <View
             style={{
               flex: 1,
@@ -164,18 +187,14 @@ const EmergencyScreen = ({ navigation }) => {
           >
             <Button
               style={{
-                width: 250,
+                width: 100,
                 flex: 1,
                 justifyContent: "center",
                 alignItems: "center",
-                borderRadius: 20,
+                borderRadius: 10,
               }}
-              onPress={() => getLocation}
+              onPress={() => onSubmit()}
             >
-              <MaterialIcons
-                name="gps-fixed"
-                style={{ color: "#fff", fontSize: 15, marginRight: 5 }}
-              />
               <Text
                 style={{
                   color: "#fff",
@@ -183,7 +202,7 @@ const EmergencyScreen = ({ navigation }) => {
                   textTransform: "uppercase",
                 }}
               >
-                Get my current location
+                Submit
               </Text>
             </Button>
           </View>
