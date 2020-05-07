@@ -112,9 +112,9 @@ const EmergencyScreen = ({ navigation }) => {
 
     // // console.log(data);
 
-    await Axios.post("http://192.168.43.191:5000/mail/", emailContent)
+    await Axios.post("http://165.22.223.187:5000/mail/", emailContent)
       .then((res) => {
-        console.log(res.body);
+        console.log("Email Sent!");
       })
       .catch((err) => {
         console.log("Error " + err.status);
