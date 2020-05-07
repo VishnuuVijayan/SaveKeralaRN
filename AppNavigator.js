@@ -42,15 +42,15 @@ class AppNavigator extends Component {
       <NavigationContainer ref={navigationRef}>
         <Drawer.Navigator initialRouteName="Home">
           <Drawer.Screen name="Home" children={StackNavigator} />
+          <Drawer.Screen name="Login" component={LoginScreen} />
           <Drawer.Screen
             name="Report an Emergency"
-            children={EmergencyScreen}
+            component={EmergencyScreen}
           />
           <Drawer.Screen
             name="Register as a Volunteer"
-            children={VolunteerScreen}
+            component={VolunteerScreen}
           />
-          {/* <Drawer.Screen name="Log in" children={LoginScreen} /> */}
           <Drawer.Screen name="Settings" component={SettingsScreen} />
         </Drawer.Navigator>
       </NavigationContainer>
