@@ -15,19 +15,20 @@ import { navigationRef } from "./RootNavigation";
 import HelpView from "./screens/HelpViewScreen";
 import AuthorityScreen from "./screens/AuthorityScreen";
 import EmergencyScreen from "./screens/EmergencyScreen";
+import VolunteerScreen from "./screens/VolunteerScreen";
 
 const Drawer = createDrawerNavigator();
 
 class AppNavigator extends Component {
   state = {
-    loading: true,
+    loading: true
   };
 
   async componentDidMount() {
     await Font.loadAsync({
       Roboto: require("native-base/Fonts/Roboto.ttf"),
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
-      ...Ionicons.font,
+      ...Ionicons.font
     });
     this.setState({ loading: false });
   }
@@ -42,6 +43,10 @@ class AppNavigator extends Component {
           <Drawer.Screen
             name="Report an Emergency"
             children={EmergencyScreen}
+          />
+          <Drawer.Screen
+            name="Register as a Volunteer"
+            children={VolunteerScreen}
           />
           <Drawer.Screen name="Settings" component={SettingsScreen} />
         </Drawer.Navigator>
@@ -58,22 +63,29 @@ function StackNavigator() {
       <Stack.Screen
         name="Home"
         options={{
-          headerShown: false,
+          headerShown: false
         }}
         component={HomeScreen}
+      />
+      <Stack.Screen
+        name="volunteer"
+        options={{
+          headerShown: false
+        }}
+        component={VolunteerScreen}
       />
 
       <Stack.Screen
         name="help"
         options={{
-          headerShown: false,
+          headerShown: false
         }}
         component={HelpView}
       />
       <Stack.Screen
         name="emergency"
         options={{
-          headerShown: false,
+          headerShown: false
         }}
         component={EmergencyScreen}
       />
@@ -81,14 +93,14 @@ function StackNavigator() {
         name="Disaster"
         component={DisasterScreen}
         options={{
-          headerShown: false,
+          headerShown: false
         }}
       />
       <Stack.Screen
         name="contact"
         component={AuthorityScreen}
         options={{
-          headerShown: false,
+          headerShown: false
         }}
       />
       {/* <Stack.Screen name="Splash" component={SplashScreen} /> */}

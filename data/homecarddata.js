@@ -5,22 +5,22 @@ export const cards = [
     content: "",
     btnRoute: "emergency",
     image:
-      "https://cdn2.iconfinder.com/data/icons/antto-basic-1/450/request-512.png",
+      "https://cdn2.iconfinder.com/data/icons/antto-basic-1/450/request-512.png"
   },
   {
     key: 2,
-    heading: "Collection Centers",
+    heading: "Register as a volunteer",
     content: "",
-    btnRoute: "",
+    btnRoute: "volunteer",
     image:
-      "https://st3.depositphotos.com/6778576/14709/v/1600/depositphotos_147091501-stock-illustration-map-location-icon.jpg",
+      "https://st3.depositphotos.com/6778576/14709/v/1600/depositphotos_147091501-stock-illustration-map-location-icon.jpg"
   },
   {
     key: 3,
     heading: "Relief Camps",
     content: "",
     btnRoute: "Home",
-    image: "https://static1.bigstockphoto.com/4/5/2/large1500/254017279.jpg",
+    image: "https://static1.bigstockphoto.com/4/5/2/large1500/254017279.jpg"
   },
   {
     key: 4,
@@ -28,7 +28,7 @@ export const cards = [
     content: "",
     btnRoute: "",
     image:
-      "https://cdn5.vectorstock.com/i/1000x1000/15/44/helping-hands-vector-1421544.jpg",
+      "https://cdn5.vectorstock.com/i/1000x1000/15/44/helping-hands-vector-1421544.jpg"
   },
   // {
   //   key: 5,
@@ -44,6 +44,6 @@ export const cards = [
     content: "",
     btnRoute: "Home",
     image:
-      "https://image.shutterstock.com/image-vector/partnership-contribute-puzzles-trendy-icon-260nw-1204863133.jpg",
-  },
+      "https://image.shutterstock.com/image-vector/partnership-contribute-puzzles-trendy-icon-260nw-1204863133.jpg"
+  }
 ];
