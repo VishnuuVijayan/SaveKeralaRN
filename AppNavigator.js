@@ -16,6 +16,7 @@ import HelpView from "./screens/HelpViewScreen";
 import AuthorityScreen from "./screens/AuthorityScreen";
 import EmergencyScreen from "./screens/EmergencyScreen";
 import VolunteerScreen from "./screens/VolunteerScreen";
+import LoginScreen from "./screens/LoginScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -48,6 +49,7 @@ class AppNavigator extends Component {
             name="Register as a Volunteer"
             children={VolunteerScreen}
           />
+          <Drawer.Screen name="Log in" children={LoginScreen} />
           <Drawer.Screen name="Settings" component={SettingsScreen} />
         </Drawer.Navigator>
       </NavigationContainer>
@@ -73,6 +75,13 @@ function StackNavigator() {
           headerShown: false
         }}
         component={VolunteerScreen}
+      />
+      <Stack.Screen
+        name="login"
+        options={{
+          headerShown: false
+        }}
+        component={LoginScreen}
       />
 
       <Stack.Screen
