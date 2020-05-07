@@ -98,14 +98,28 @@ const EmergencyScreen = ({ navigation }) => {
       addMsg
     };
 
-    await Axios.get("http://192.168.43.191:5000/mail/", emailContent)
+    // const re = /,\n}$/;
+
+    // const str = emailContent.toString();
+
+    // const subst = "/n}";
+
+    // const result = str.replace(re, subst);
+
+    // console.log(result);
+
+    // const data = JSON.stringify(emailContent);
+
+    // // console.log(data);
+
+    await Axios.post("http://192.168.43.191:5000/mail/", emailContent)
       .then((res) => {
-        console.log("done");
+        console.log(res.body);
       })
       .catch((err) => {
         console.log("Error " + err.status);
       });
-    console.log("http://192.168.43.191:5000/mail/", emailContent);
+    // console.log("http://192.168.43.191:5000/mail/", data);
   };
 
   return (
