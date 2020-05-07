@@ -8,7 +8,7 @@ import {
   Text,
   Icon,
   Title,
-  Button,
+  Button
 } from "native-base";
 import * as RootNavigation from "../RootNavigation";
 
@@ -29,7 +29,7 @@ const AppHeader = (props) => {
         <Title>{props.name}</Title>
       </Body>
       <Body />
-      {props.type !== "A" ? (
+      {!props.type ? (
         <Right>
           <Icon
             name="home"

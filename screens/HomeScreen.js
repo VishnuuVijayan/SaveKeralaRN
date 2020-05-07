@@ -15,7 +15,7 @@ import {
   CardItem,
   Thumbnail,
   Text,
-  DeckSwiper,
+  DeckSwiper
 } from "native-base";
 import Carousel from "../component/Carousel";
 import { dummyData } from "../data/Data";
@@ -52,7 +52,7 @@ function HomeScreen({ navigation }) {
   }
   return (
     <Container>
-      <Header name="Home" navigation={navigation} />
+      <Header name="Home" navigation={navigation} type="A" />
       <Content
       // contentContainerStyle={{
       //   flex: 1,
@@ -74,7 +74,7 @@ function HomeScreen({ navigation }) {
                 <Body
                   style={{
                     flex: 1,
-                    justifyContent: "center",
+                    justifyContent: "center"
                   }}
                 >
                   <Text>{card.heading}</Text>
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 50,
     width: 50,
-    borderRadius: 25,
-  },
+    borderRadius: 25
+  }
 });
 export default HomeScreen;
