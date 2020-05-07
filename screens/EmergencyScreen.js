@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Animated, TouchableOpacity } from "react-native";
+import { View, Text, Animated, TouchableOpacity, Alert } from "react-native";
 import {
   Container,
   Content,
@@ -11,7 +11,7 @@ import {
   Input,
   Picker,
   Button,
-  Right,
+  Right
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import Header from "../component/Header";
@@ -19,13 +19,11 @@ import LoadingScreen from "./LoadingScreen";
 import Axios from "axios";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
-import { TouchableHighlight } from "react-native-gesture-handler";
+import { Button as Btn, Overlay } from "react-native-elements";
 
 const EmergencyScreen = ({ navigation }) => {
-  const [picker, setPicker] = React.useState("Select District...");
-  const [secondPicker, setsecondPicker] = React.useState("Select category...");
   const [loading, setLoading] = React.useState(true);
-  const [district, setDistrict] = React.useState("");
+  const [district, setDistrict] = React.useState("Select District...");
   const [districts, setDistricts] = React.useState([]);
   const [disaster, setDisaster] = React.useState("");
   const [disasters, setDisasters] = React.useState([]);
@@ -33,9 +31,10 @@ const EmergencyScreen = ({ navigation }) => {
   const [name, setName] = React.useState("");
   const [contact, setContact] = React.useState("");
   const [addMsg, setAddMsg] = React.useState("");
+
   const [location, setLocation] = React.useState({
     latitude: null,
-    longitude: null,
+    longitude: null
   });
   React.useEffect(() => {
     dataFetch();
@@ -48,11 +47,11 @@ const EmergencyScreen = ({ navigation }) => {
       console.log("Permission Denied!!");
     } else {
       const userLocation = await Location.getCurrentPositionAsync({
-        enableHighAccuracy: true,
+        enableHighAccuracy: true
       });
       await setLocation({
         latitude: userLocation.coords.latitude,
-        longitude: userLocation.coords.longitude,
+        longitude: userLocation.coords.longitude
       });
     }
   };
@@ -70,7 +69,6 @@ const EmergencyScreen = ({ navigation }) => {
         return 0;
       });
       setDistricts(uniqueDistricts);
-      setDistrict(uniqueDistricts[0]);
     });
     Axios.get("http://165.22.223.187:5000/disaster/").then((res) => {
       let datas = res.data;
@@ -82,10 +80,32 @@ const EmergencyScreen = ({ navigation }) => {
     return <LoadingScreen />;
   }
 
-  onSubmit = () => {
+  onSubmit = async () => {
     console.log("Form submitted");
-    console.log(location);
-    console.log(name);
+    let { latitude, longitude } = location;
+
+    // latitude = latitude.toString();
+    // longitude = longitude.toString();
+
+    const emailContent = {
+      name,
+      contact,
+      latitude,
+      longitude,
+      district,
+      disaster,
+      service,
+      addMsg
+    };
+
+    await Axios.get("http://192.168.43.191:5000/mail/", emailContent)
+      .then((res) => {
+        console.log("done");
+      })
+      .catch((err) => {
+        console.log("Error " + err.status);
+      });
+    console.log("http://192.168.43.191:5000/mail/", emailContent);
   };
 
   return (
@@ -105,8 +125,8 @@ const EmergencyScreen = ({ navigation }) => {
               placeholder="Select your SIM"
               placeholderStyle={{ color: "#bfc6ea" }}
               placeholderIconColor="#007aff"
-              selectedValue={picker}
-              onValueChange={(value) => setPicker(value)}
+              selectedValue={district}
+              onValueChange={(value) => setDistrict(value)}
             >
               <Picker.Item label="Select District..." value="0" />
               {districts.map((item) => {
@@ -123,8 +143,8 @@ const EmergencyScreen = ({ navigation }) => {
               placeholder="Select your SIM"
               placeholderStyle={{ color: "#bfc6ea" }}
               placeholderIconColor="#007aff"
-              selectedValue={secondPicker}
-              onValueChange={(value) => setsecondPicker(value)}
+              selectedValue={disaster}
+              onValueChange={(value) => setDisaster(value)}
             >
               <Picker.Item label="Select Disaster ..." value="0" />
               {disasters.map((item) => {
@@ -172,8 +192,8 @@ const EmergencyScreen = ({ navigation }) => {
             <Label>Phone Number...</Label>
             <Input onChange={(value) => setContact(value.nativeEvent.text)} />
           </Item>
-          <Item floatingLabel last>
-            <Label>Additional Messages</Label>
+          <Item floatingLabel last style={{ marginBottom: 20 }}>
+            <Label>Any Additional Message...</Label>
             <Input onChange={(value) => setAddMsg(value.nativeEvent.text)} />
           </Item>
           <View
@@ -184,20 +204,23 @@ const EmergencyScreen = ({ navigation }) => {
                 await getLocation();
               }}
               style={{
-                width: 200,
+                width: 125,
                 borderRadius: 10,
                 flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: 10,
+                marginTop: 10
               }}
             >
-              <Icon name="gps-fixed" type="MaterialIcons" />
+              <Icon
+                name="gps-fixed"
+                type="MaterialIcons"
+                style={{ marginLeft: 15, fontSize: 15 }}
+              />
               <Text
                 style={{
                   color: "#fff",
                   fontSize: 15,
                   textTransform: "uppercase",
+                  marginRight: 30
                 }}
               >
                 location
@@ -210,7 +233,7 @@ const EmergencyScreen = ({ navigation }) => {
               flex: 1,
               justifyContent: "center",
               alignItems: "center",
-              marginTop: 30,
+              marginTop: 30
             }}
           >
             <Button
@@ -219,7 +242,7 @@ const EmergencyScreen = ({ navigation }) => {
                 flex: 1,
                 justifyContent: "center",
                 alignItems: "center",
-                borderRadius: 10,
+                borderRadius: 10
               }}
               onPress={() => onSubmit()}
             >
@@ -227,7 +250,7 @@ const EmergencyScreen = ({ navigation }) => {
                 style={{
                   color: "#fff",
                   fontSize: 15,
-                  textTransform: "uppercase",
+                  textTransform: "uppercase"
                 }}
               >
                 Submit
@@ -239,5 +262,23 @@ const EmergencyScreen = ({ navigation }) => {
     </Container>
   );
 };
+
+// function SubmitOverlay({ data }) {
+//   const [visible, setVisible] = React.useState(false);
+
+//   const toggleOverlay = () => {
+//     setVisible(!visible);
+//   };
+
+//   return (
+//     <View>
+//       <Button title="Open Overlay" onPress={toggleOverlay} />
+
+//       <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
+//         <Text>Hello from Overlay!</Text>
+//       </Overlay>
+//     </View>
+//   );
+// }
 
 export default EmergencyScreen;
