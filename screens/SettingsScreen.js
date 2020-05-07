@@ -9,9 +9,9 @@ import {
   Title,
   Body,
   Icon,
-  Button,
+  Button
 } from "native-base";
-import Header from "../component/Header";
+import Header from "../components/Header";
 
 const SettingsScreen = ({ navigation }) => {
   return (
@@ -21,7 +21,7 @@ const SettingsScreen = ({ navigation }) => {
         contentContainerStyle={{
           flex: 1,
           justifyContent: "center",
-          alignItems: "center",
+          alignItems: "center"
         }}
       >
         <Text> SettingsScreen</Text>

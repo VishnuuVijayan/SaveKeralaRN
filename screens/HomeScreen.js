@@ -17,10 +17,10 @@ import {
   Text,
   DeckSwiper
 } from "native-base";
-import Carousel from "../component/Carousel";
+import Carousel from "../components/Carousel";
 import { dummyData } from "../data/Data";
 import { cards } from "../data/homecarddata";
-import Header from "../component/Header";
+import Header from "../components/Header";
 
 import Axios from "axios";
 import LoadingScreen from "./LoadingScreen";

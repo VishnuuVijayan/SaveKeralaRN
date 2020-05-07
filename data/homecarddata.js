@@ -18,8 +18,8 @@ export const cards = [
   {
     key: 3,
     heading: "Relief Camps",
-    content: "",
-    btnRoute: "Home",
+    content: "login",
+    btnRoute: "login",
     image: "https://static1.bigstockphoto.com/4/5/2/large1500/254017279.jpg"
   },
   {

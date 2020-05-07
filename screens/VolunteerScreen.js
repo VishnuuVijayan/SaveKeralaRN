@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { Container, Content } from "native-base";
-import Header from "../component/Header";
+import Header from "../components/Header";
 
 const VolunteerScreen = ({ navigation }) => {
   return (

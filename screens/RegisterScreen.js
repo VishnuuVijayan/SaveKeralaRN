@@ -1,29 +1,36 @@
 import React, { memo, useState } from "react";
-import { TouchableOpacity, StyleSheet, Text, View } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Background from "../components/Background";
 import Logo from "../components/Logo";
 import Header from "../components/LoginHeader";
 import Button from "../components/Button";
 import TextInput from "../components/TextInput";
-// import BackButton from "../components/BackButton";
+import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
-import { emailValidator, passwordValidator } from "../core/utils";
-// import { loginUser } from "../api/auth-api";
+import {
+  emailValidator,
+  passwordValidator,
+  nameValidator
+} from "../core/utils";
+// import { signInUser } from "../api/auth-api";
 import Toast from "../components/Toast";
 
-const LoginScreen = ({ navigation }) => {
+const RegisterScreen = ({ navigation }) => {
+  const [name, setName] = useState({ value: "", error: "" });
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const _onLoginPressed = async () => {
+  const _onSignUpPressed = async () => {
     if (loading) return;
 
+    const nameError = nameValidator(name.value);
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
 
-    if (emailError || passwordError) {
+    if (emailError || passwordError || nameError) {
+      setName({ ...name, error: nameError });
       setEmail({ ...email, error: emailError });
       setPassword({ ...password, error: passwordError });
       return;
@@ -31,25 +38,33 @@ const LoginScreen = ({ navigation }) => {
 
     setLoading(true);
 
-    // const response = await loginUser({
-    //   email: email.value,
-    //   password: password.value
-    // });
+    const response = await signInUser({
+      name: name.value,
+      email: email.value,
+      password: password.value
+    });
 
-    // if (response.error) {
-    //   setError(response.error);
-    // }
+    if (response.error) {
+      setError(response.error);
+    }
 
     setLoading(false);
   };
 
   return (
     <Background>
-      {/* <BackButton goBack={() => navigation.navigate("HomeScreen")} /> */}
-
       <Logo />
 
-      <Header>Login to SaveKerala App</Header>
+      <Header>Create Account</Header>
+
+      <TextInput
+        label="Name"
+        returnKeyType="next"
+        value={name.value}
+        onChangeText={(text) => setName({ value: text, error: "" })}
+        error={!!name.error}
+        errorText={name.error}
+      />
 
       <TextInput
         label="Email"
@@ -75,22 +90,19 @@ const LoginScreen = ({ navigation }) => {
         autoCapitalize="none"
       />
 
-      <View style={styles.forgotPassword}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("ForgotPasswordScreen")}
-        >
-          <Text style={styles.label}>Forgot your password?</Text>
-        </TouchableOpacity>
-      </View>
-
-      <Button loading={loading} mode="contained" onPress={_onLoginPressed}>
-        Login
+      <Button
+        loading={loading}
+        mode="contained"
+        onPress={_onSignUpPressed}
+        style={styles.button}
+      >
+        Sign Up
       </Button>
 
       <View style={styles.row}>
-        <Text style={styles.label}>Don’t have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("register")}>
-          <Text style={styles.link}>Sign up</Text>
+        <Text style={styles.label}>Already have an account? </Text>
+        <TouchableOpacity onPress={() => navigation.navigate("login")}>
+          <Text style={styles.link}>Login</Text>
         </TouchableOpacity>
       </View>
 
@@ -100,17 +112,15 @@ const LoginScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  forgotPassword: {
-    width: "100%",
-    alignItems: "flex-end",
-    marginBottom: 24
+  label: {
+    color: theme.colors.secondary
+  },
+  button: {
+    marginTop: 24
   },
   row: {
     flexDirection: "row",
     marginTop: 4
-  },
-  label: {
-    color: theme.colors.secondary
   },
   link: {
     fontWeight: "bold",
@@ -118,4 +128,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default memo(LoginScreen);
+export default memo(RegisterScreen);

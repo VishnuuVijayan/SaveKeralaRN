@@ -11,10 +11,10 @@ import {
   Title,
   Content,
   Card,
-  CardItem,
+  CardItem
 } from "native-base";
 import Axios from "axios";
-import Header from "../component/Header";
+import Header from "../components/Header";
 
 import { setProvidesAudioData } from "expo/build/AR";
 import LoadingScreen from "./LoadingScreen";
@@ -90,7 +90,7 @@ const AuthorityScreen = ({ route, navigation }) => {
                 textTransform: "uppercase",
                 fontSize: 22,
                 letterSpacing: 2,
-                textAlign: "center",
+                textAlign: "center"
               }}
             >
               {type === "A"
@@ -131,7 +131,7 @@ const Collector = ({ data }) => {
         style={{
           fontSize: 18,
           textAlign: "center",
-          letterSpacing: 1,
+          letterSpacing: 1
         }}
       >
         Collector Name : {data.collector_fname + " " + data.collector_lname}
@@ -141,7 +141,7 @@ const Collector = ({ data }) => {
           fontSize: 18,
           textAlign: "center",
           letterSpacing: 1,
-          marginTop: 10,
+          marginTop: 10
         }}
       >
         Contact Number : {data.contact}
@@ -152,7 +152,7 @@ const Collector = ({ data }) => {
           textAlign: "center",
           letterSpacing: 1,
           marginTop: 10,
-          marginBottom: 10,
+          marginBottom: 10
         }}
       >
         E-mail : {data.email}
@@ -168,7 +168,7 @@ const Tahsildar = ({ data }) => {
         style={{
           fontSize: 18,
           textAlign: "center",
-          letterSpacing: 1,
+          letterSpacing: 1
         }}
       >
         Tahsildar Name : {data.t_fname + " " + data.t_lname}
@@ -178,7 +178,7 @@ const Tahsildar = ({ data }) => {
           fontSize: 18,
           textAlign: "center",
           letterSpacing: 1,
-          marginTop: 10,
+          marginTop: 10
         }}
       >
         Contact Number : {data.contact}
@@ -188,7 +188,7 @@ const Tahsildar = ({ data }) => {
           fontSize: 18,
           textAlign: "center",
           letterSpacing: 1,
-          marginTop: 10,
+          marginTop: 10
         }}
       >
         Taluk : {data.taluk}
@@ -199,7 +199,7 @@ const Tahsildar = ({ data }) => {
           textAlign: "center",
           letterSpacing: 1,
           marginTop: 10,
-          marginBottom: 10,
+          marginBottom: 10
         }}
       >
         District : {data.district}
@@ -215,7 +215,7 @@ const Secretary = ({ data }) => {
         style={{
           fontSize: 18,
           lineHeight: 25,
-          letterSpacing: 1,
+          letterSpacing: 1
         }}
       >
         Secretary Name : {data.secratary_name}
@@ -225,7 +225,7 @@ const Secretary = ({ data }) => {
           fontSize: 18,
           textAlign: "center",
           letterSpacing: 1,
-          marginTop: 10,
+          marginTop: 10
         }}
       >
         Contact Number : {data.contact}
@@ -235,7 +235,7 @@ const Secretary = ({ data }) => {
           fontSize: 18,
           textAlign: "center",
           letterSpacing: 1,
-          marginTop: 10,
+          marginTop: 10
         }}
       >
         E-mail : {data.email}
@@ -247,7 +247,7 @@ const Secretary = ({ data }) => {
           letterSpacing: 1,
           marginBottom: 10,
           marginBottom: 10,
-          marginTop: 10,
+          marginTop: 10
         }}
       >
         Grama Panchayat : {data.panchayat}

@@ -3,7 +3,7 @@ import { View } from "react-native";
 import Axios from "axios";
 import LoadingScreen from "./LoadingScreen";
 import moduleName from "react-native-vector-icons";
-import Header from "../component/Header";
+import Header from "../components/Header";
 import {
   Container,
   Content,
@@ -16,7 +16,7 @@ import {
   List,
   Icon,
   Button,
-  Text,
+  Text
 } from "native-base";
 import { navigationRef } from "../RootNavigation";
 
@@ -72,7 +72,7 @@ function HelpView({ navigation, route }) {
             onPress={() =>
               navigation.navigate("contact", {
                 id: collector[0]._id,
-                type: "A",
+                type: "A"
               })
             }
             style={{ flex: 1, justifyContent: "space-between" }}
@@ -97,7 +97,7 @@ function HelpView({ navigation, route }) {
                 onPress={() =>
                   navigation.navigate("contact", {
                     id: item._id,
-                    type: "B",
+                    type: "B"
                   })
                 }
                 key={item._id}
@@ -121,7 +121,7 @@ function HelpView({ navigation, route }) {
                 onPress={() =>
                   navigation.navigate("contact", {
                     id: item._id,
-                    type: "C",
+                    type: "C"
                   })
                 }
                 key={item._id}

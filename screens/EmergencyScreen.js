@@ -14,7 +14,7 @@ import {
   Right
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
-import Header from "../component/Header";
+import Header from "../components/Header";
 import LoadingScreen from "./LoadingScreen";
 import Axios from "axios";
 import * as Location from "expo-location";

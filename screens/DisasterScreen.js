@@ -12,13 +12,13 @@ import {
   Button,
   Form,
   Item,
-  Picker,
+  Picker
 } from "native-base";
-import Header from "../component/Header";
+import Header from "../components/Header";
 
 import Axios from "axios";
 import LoadingScreen from "./LoadingScreen";
-import Accordion from "../component/Accordion";
+import Accordion from "../components/Accordion";
 import { DrawerActions } from "@react-navigation/native";
 // import HelpView from "./HelpViewScreen";
 
@@ -85,7 +85,7 @@ function DisasterScreen({ route, navigation }) {
             alignItems: "center",
             flex: 1,
             marginTop: 25,
-            marginBottom: 25,
+            marginBottom: 25
           }}
         >
           <Text style={{ fontSize: 35, letterSpacing: 2, fontWeight: "bold" }}>
@@ -96,7 +96,7 @@ function DisasterScreen({ route, navigation }) {
               fontSize: 15,
               marginTop: 5,
               letterSpacing: 2,
-              fontWeight: "bold",
+              fontWeight: "bold"
             }}
           >
             {"(" + data.slug + ")"}
@@ -109,7 +109,7 @@ function DisasterScreen({ route, navigation }) {
               maxWidth: width - 20,
               height,
               maxHeight: height / 3,
-              borderRadius: 10,
+              borderRadius: 10
             }}
             source={{ uri: data.imgsrc }}
           />
@@ -118,8 +118,8 @@ function DisasterScreen({ route, navigation }) {
               data={[
                 {
                   title: "About " + data.disaster_name,
-                  content: data.description,
-                },
+                  content: data.description
+                }
               ]}
             />
             <View
@@ -127,19 +127,19 @@ function DisasterScreen({ route, navigation }) {
                 flex: 1,
                 justifyContent: "center",
                 alignItems: "center",
-                marginTop: 40,
+                marginTop: 40
               }}
             >
               <Text
                 style={{
-                  fontSize: 20,
+                  fontSize: 20
                 }}
               >
                 Need Help?
               </Text>
               <Text
                 style={{
-                  fontSize: 15,
+                  fontSize: 15
                 }}
               >
                 Select your District
@@ -169,7 +169,7 @@ function DisasterScreen({ route, navigation }) {
               style={{
                 justifyContent: "center",
                 alignItems: "center",
-                marginTop: 20,
+                marginTop: 20
               }}
             >
               <Button
@@ -177,11 +177,11 @@ function DisasterScreen({ route, navigation }) {
                 style={{
                   justifyContent: "center",
                   borderRadius: 5,
-                  width: width / 3,
+                  width: width / 3
                 }}
                 onPress={() =>
                   navigation.navigate("help", {
-                    district: district,
+                    district: district
                   })
                 }
               >
@@ -189,7 +189,7 @@ function DisasterScreen({ route, navigation }) {
                   style={{
                     color: "#fff",
                     fontSize: 17,
-                    textTransform: "uppercase",
+                    textTransform: "uppercase"
                   }}
                 >
                   {" "}
