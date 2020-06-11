@@ -19,6 +19,7 @@ import VolunteerScreen from "./screens/VolunteerScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import DonateHome from "./screens/DonateHome";
+import CMDRFWebView from "./screens/CMDRFWebView";
 
 const Drawer = createDrawerNavigator();
 
@@ -91,6 +92,13 @@ function StackNavigator() {
           headerShown: false
         }}
         component={RegisterScreen}
+      />
+      <Stack.Screen
+        name="cmdrf"
+        options={{
+          headerShown: false
+        }}
+        component={CMDRFWebView}
       />
 
       <Stack.Screen
