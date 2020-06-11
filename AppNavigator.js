@@ -20,6 +20,7 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import DonateHome from "./screens/DonateHome";
 import CMDRFWebView from "./screens/CMDRFWebView";
+import CampDonation from "./screens/CampDonation";
 
 const Drawer = createDrawerNavigator();
 
@@ -78,6 +79,13 @@ function StackNavigator() {
           headerShown: false
         }}
         component={VolunteerScreen}
+      />
+      <Stack.Screen
+        name="campdonations"
+        options={{
+          headerShown: false
+        }}
+        component={CampDonation}
       />
       <Stack.Screen
         name="login"

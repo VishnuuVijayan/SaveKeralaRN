@@ -9,7 +9,7 @@ export default function DonateHome({ navigation }) {
     <Container>
       <Header name="Donate" navigation={navigation} />
       <Content style={{ margin: 20 }}>
-        <TouchableOpacity onPress={() => console.log("Hello")}>
+        <TouchableOpacity onPress={() => navigation.navigate("campdonations")}>
           <Card>
             <CardItem>
               <Body>
