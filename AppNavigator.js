@@ -18,6 +18,7 @@ import EmergencyScreen from "./screens/EmergencyScreen";
 import VolunteerScreen from "./screens/VolunteerScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
+import DonateHome from "./screens/DonateHome";
 
 const Drawer = createDrawerNavigator();
 
@@ -105,6 +106,13 @@ function StackNavigator() {
           headerShown: false
         }}
         component={EmergencyScreen}
+      />
+      <Stack.Screen
+        name="donate"
+        options={{
+          headerShown: false
+        }}
+        component={DonateHome}
       />
       <Stack.Screen
         name="Disaster"

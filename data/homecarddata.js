@@ -42,7 +42,7 @@ export const cards = [
     key: 5,
     heading: "Contribute",
     content: "",
-    btnRoute: "Home",
+    btnRoute: "donate",
     image:
       "https://image.shutterstock.com/image-vector/partnership-contribute-puzzles-trendy-icon-260nw-1204863133.jpg"
   }
