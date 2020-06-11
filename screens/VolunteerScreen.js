@@ -1,14 +1,26 @@
 import React, { useEffect } from "react";
 import { View, Text } from "react-native";
 import Axios from "axios";
-import { Container, Content, Item, Input, Picker, Icon } from "native-base";
+import {
+  Container,
+  Content,
+  Item,
+  Input,
+  Picker,
+  Icon,
+  Button,
+  Form,
+  CheckBox
+} from "native-base";
 import Header from "../components/Header";
 import LoadingScreen from "./LoadingScreen";
 
-export default function VolunteerRegn() {
+const bloodgroups = ["A+", "B+", "O+", "AB+", "A-", "B-", "O-", "AB-"];
+
+export default function VolunteerRegn({ navigation }) {
   const [district, setDistrict] = React.useState("Select District...");
   const [districts, setDistricts] = React.useState([]);
-  const [panchayat, setPanchayat] = React.useState("Select District...");
+  const [panchayat, setPanchayat] = React.useState("Select Panchayat");
   const [localbodies, setLocalBodies] = React.useState([]);
   const [locality, setLocality] = React.useState("");
   const [contact, setContact] = React.useState("");
@@ -23,7 +35,8 @@ export default function VolunteerRegn() {
     // const { user } = this.props.auth;
     // const { _id, email, first_name, last_name } = user;
     const {
-      locality,
+      panchayat,
+      district,
       contact,
       address,
       skills,
@@ -61,15 +74,23 @@ export default function VolunteerRegn() {
       });
       setDistricts(uniqueDistricts);
     });
-    Axios.get("http://165.22.223.187:5000/disaster/").then((res) => {
-      let datas = res.data;
-      setDisasters(datas);
-    });
+
     setLoading(false);
   };
 
-  useEffect(async () => {
-    await dataFetch();
+  const secondaryDataFecth = async () => {
+    await Axios.get(
+      "http://165.22.223.187:5000/secretary/panchayat_list/" + district
+    ).then((res) => {
+      let data = res.data;
+      setLocalBodies(data);
+    });
+    setLoading(false);
+    console.log(localbodies);
+  };
+
+  useEffect(() => {
+    dataFetch();
   }, []);
 
   if (loading) {
@@ -78,9 +99,61 @@ export default function VolunteerRegn() {
 
   return (
     <Container>
-      <Header name="Contact Details" />
-      <Content>
-        <Item picker>
+      <Header name="Volunteer Registeration" navigation={navigation} />
+      <Content style={{ margin: 20 }}>
+        <Text
+          style={{
+            // alignSelf:"center",
+            fontSize: 20,
+            letterSpacing: 1,
+            marginBottom: 30
+          }}
+        >
+          Register as Volunteer
+        </Text>
+        <Form onSubmit={onSubmit}>
+          <Item regular style={{ marginBottom: 10, borderRadius: 10 }}>
+            <Input
+              keyboardType="number-pad"
+              value={contact}
+              onChange={(val) => {
+                setContact(val.nativeEvent.text);
+              }}
+              placeholder="Enter contact number..."
+            />
+          </Item>
+          <Item regular style={{ marginBottom: 10, borderRadius: 10 }}>
+            <Input
+              style={{ marginTop: 20 }}
+              value={address}
+              maxLength={200}
+              onChange={(val) => {
+                setAddress(val.nativeEvent.text);
+              }}
+              // numberOfLines={3}
+              scrollEnabled={true}
+              // multiline={true}
+              placeholder="Address.."
+            />
+          </Item>
+          <Item regular style={{ marginBottom: 10, borderRadius: 10 }}>
+            <Input
+              value={skills}
+              onChange={(val) => {
+                setSkills(val.nativeEvent.text);
+              }}
+              placeholder="Skills..."
+            />
+          </Item>
+          <Item regular style={{ marginBottom: 10, borderRadius: 10 }}>
+            <Input
+              value={dept}
+              onChange={(val) => {
+                setDept(val.nativeEvent.text);
+              }}
+              placeholder="Department..."
+            />
+          </Item>
           <Picker
             label="Select District.."
             mode="dropdown"
@@ -90,23 +163,75 @@ export default function VolunteerRegn() {
             placeholderStyle={{ color: "#bfc6ea" }}
             placeholderIconColor="#007aff"
             selectedValue={district}
-            onValueChange={(value) => setDistrict(value)}
+            onValueChange={(value) => {
+              setDistrict(value);
+
+              setLoading(true);
+              secondaryDataFecth();
+            }}
           >
             <Picker.Item label="Select District..." value="0" />
             {districts.map((item) => {
               return <Picker.Item key={item} label={item} value={item} />;
             })}
           </Picker>
-        </Item>
-        <Item regular>
-          <Input
-            value={address}
-            onChange={(val) => {
-              setAddress(val.nativeEvent.text);
+          <Picker
+            label="Select Panchayat.."
+            mode="dropdown"
+            iosIcon={<Icon name="arrow-down" />}
+            style={{ width: undefined }}
+            placeholder="Select your SIM"
+            placeholderStyle={{ color: "#bfc6ea" }}
+            placeholderIconColor="#007aff"
+            selectedValue={district}
+            onValueChange={(value) => {
+              setDistrict(value);
             }}
-            placeholder="Regular Textbox"
-          />
-        </Item>
+          >
+            <Picker.Item label="Select Panchayat..." value="0" />
+            {localbodies.map((item) => {
+              return (
+                <Picker.Item
+                  key={item.panchayat}
+                  label={item.panchayat}
+                  value={item.panchayat}
+                />
+              );
+            })}
+          </Picker>
+
+          <Picker
+            label="Select Panchayat.."
+            mode="dropdown"
+            iosIcon={<Icon name="arrow-down" />}
+            style={{ width: undefined }}
+            placeholder="Select your SIM"
+            placeholderStyle={{ color: "#bfc6ea" }}
+            placeholderIconColor="#007aff"
+            selectedValue={bg}
+            onValueChange={(value) => {
+              setBg(value);
+            }}
+          >
+            <Picker.Item label="Select Blood Group..." value="0" />
+            {bloodgroups.map((item) => {
+              return <Picker.Item key={item} label={item} value={item} />;
+            })}
+          </Picker>
+          <View style={{ flexDirection: "row", marginTop: 10 }}>
+            <CheckBox
+              style={{ borderRadius: 10 }}
+              checked={readytovolunteer}
+              onPress={() => setReadyToVolunteer(!readytovolunteer)}
+            />
+            <Text style={{ marginLeft: 30, marginTop: 2 }}>
+              Register as a volunteer?
+            </Text>
+          </View>
+          <Button block info style={{ marginTop: 20, borderRadius: 10 }}>
+            <Text style={{ color: "#fff", fontSize: 18 }}>Update Details </Text>
+          </Button>
+        </Form>
       </Content>
     </Container>
   );
