@@ -26,7 +26,7 @@ export const cards = [
     key: 4,
     heading: "Volunteer Registration",
     content: "",
-    btnRoute: "",
+    btnRoute: "volunteer",
     image:
       "https://cdn5.vectorstock.com/i/1000x1000/15/44/helping-hands-vector-1421544.jpg"
   },
