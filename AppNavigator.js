@@ -21,6 +21,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 import DonateHome from "./screens/DonateHome";
 import CMDRFWebView from "./screens/CMDRFWebView";
 import CampDonation from "./screens/CampDonation";
+import CampList from "./screens/CampList";
 
 const Drawer = createDrawerNavigator();
 
@@ -79,6 +80,13 @@ function StackNavigator() {
           headerShown: false
         }}
         component={VolunteerScreen}
+      />
+      <Stack.Screen
+        name="camps"
+        options={{
+          headerShown: false
+        }}
+        component={CampList}
       />
       <Stack.Screen
         name="campdonations"
