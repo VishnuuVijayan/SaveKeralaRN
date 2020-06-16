@@ -192,8 +192,7 @@ function DisasterScreen({ route, navigation }) {
                     textTransform: "uppercase"
                   }}
                 >
-                  {" "}
-                  Get Help{" "}
+                  Get Help
                 </Text>
               </Button>
             </View>
