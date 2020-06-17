@@ -185,9 +185,13 @@ const EmergencyScreen = ({ navigation }) => {
           >
             <Picker.Item label="Select Emergency ..." value="0" />
 
-            <Picker.Item label="Ambulance" value="Ambulance" />
-            <Picker.Item label="Air Rescue" value="Air Rescue" />
-            <Picker.Item label="Boat Rescue" value="Boat Rescue" />
+            <Picker.Item label="blah1" value="blah1" />
+            <Picker.Item label="blah2" value="blah2" />
+            <Picker.Item label="blah3" value="blah3" />
+            <Picker.Item label="blah4" value="blah4" />
+            <Picker.Item label="blah5" value="blah5" />
+            <Picker.Item label="blah6" value="blah6" />
+            <Picker.Item label="blah7" value="blah7" />
           </Picker>
           <Item floatingLabel last>
             <Label>Your Name...</Label>
