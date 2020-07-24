@@ -22,14 +22,14 @@ export const cards = [
     btnRoute: "camps",
     image: "https://static1.bigstockphoto.com/4/5/2/large1500/254017279.jpg"
   },
-  {
-    key: 4,
-    heading: "Volunteer Registration",
-    content: "",
-    btnRoute: "volunteer",
-    image:
-      "https://cdn5.vectorstock.com/i/1000x1000/15/44/helping-hands-vector-1421544.jpg"
-  },
+  // {
+  //   key: 4,
+  //   heading: "Volunteer Registration",
+  //   content: "",
+  //   btnRoute: "volunteer",
+  //   image:
+  //     "https://cdn5.vectorstock.com/i/1000x1000/15/44/helping-hands-vector-1421544.jpg"
+  // },
   // {
   //   key: 5,
   //   heading: "Camps Registration",
